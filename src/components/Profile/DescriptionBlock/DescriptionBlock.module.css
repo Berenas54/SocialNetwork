@@ -1,0 +1,13 @@
+
+.background {
+    height: 300px;
+}
+
+.avatar {
+    height: 150px;
+    padding: 10px;
+}
+
+.description {
+    padding-left: 10px;
+}
