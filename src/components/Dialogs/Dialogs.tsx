@@ -18,36 +18,30 @@ const DialogItem = (props: DialogsItemsType) => {
 const Messages = (props: MessagesType) => {
     return <div className={style.message}>{props.message}</div>
 }
-let dialogsData = [
+let dialogs = [
     {id: 1, name: "Dzimych"},
     {id: 2, name: "Sveta"},
     {id: 3, name: "Pasha"},
     {id: 4, name: "Gleb"},
     {id: 5, name: "Vika"},
 ]
-let messagesData = [
+let messages = [
     {id: 1, message: "HI, brother!"},
     {id: 2, message: "Wtf"},
     {id: 3, message: "I love you"},
     {id: 4, message: "Where is my money?"},
 ]
+let dialogsElement = dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+
+let messagesElement = messages.map(message => <Messages message={message.message}/>)
 const Dialogs = () => {
     return (
         <div className={style.dialogs}>
             <div className={style.dialogItems}>
-                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
-                <DialogItem name={dialogsData[2].name} id={dialogsData[2].id}/>
-                <DialogItem name={dialogsData[3].name} id={dialogsData[3].id}/>
-                <DialogItem name={dialogsData[4].name} id={dialogsData[4].id}/>
-
+                {dialogsElement}
             </div>
             <div className={style.messages}>
-                <Messages message={messagesData[0].message}/>
-                <Messages message={messagesData[1].message}/>
-                <Messages message={messagesData[2].message}/>
-                <Messages message={messagesData[3].message}/>
-
+                {messagesElement}
             </div>
         </div>
     )
