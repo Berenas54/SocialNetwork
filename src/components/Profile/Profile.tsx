@@ -1,12 +1,14 @@
 import React from 'react';
-import style from './Profile.module.css';
+//import style from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
-import DescriptionBlock from "./DescriptionBlock/DescriptionBlock";
+import DescriptionBlock from "./ProfileInfo/DescriptionBlock";
+import { PostsType } from '../../App';
 
-const Profile = () => {
+
+const Profile = (props:PostsType) => {
     return <div>
         <DescriptionBlock/>
-        <MyPosts/>
+        <MyPosts posts={props.posts}/>
     </div>
 }
 
