@@ -1,0 +1,20 @@
+.nav {
+    grid-area: sidebar;
+    background-color: red;
+    padding: 20px;
+}
+
+.aside {
+    background-color: blue;
+
+}
+
+.asideH {
+
+    padding: 0 20px 5px 40px;
+}
+
+.wrapperAside {
+    display: flex;
+
+}
