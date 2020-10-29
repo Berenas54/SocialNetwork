@@ -21,8 +21,5 @@
 }
 
 .figure {
-    margin: 2px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #ff8559;
+    margin: 3px;
 }
