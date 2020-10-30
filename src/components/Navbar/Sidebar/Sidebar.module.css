@@ -1,0 +1,17 @@
+.nav {
+    padding: 20px;
+}
+
+.aside {
+margin-top: 70px;
+}
+
+.asideH {
+
+ text-align: center;
+}
+
+.wrapperAside {
+    display: flex;
+
+}

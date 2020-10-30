@@ -1,14 +1,15 @@
 .nav {
     grid-area: nav;
-    background-color: red;
+    background-color: lavenderblush;
     padding: 20px;
 }
 
 .item a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .item a.activeLink {
     color: black;
+    font-family: "Lucida Calligraphy", serif;
 }
