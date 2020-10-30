@@ -4,7 +4,7 @@ import './Header.css';
 const Header = () => {
     return <header className='header'>
         <img alt='logo'
-    src={"https://cdn1.vectorstock.com/i/1000x1000/47/15/paw-print-icon-vector-21864715.jpg="}/>
+    src={"https://i.pinimg.com/564x/81/cb/9c/81cb9cf335d5cbcf74d093ff869fe92e.jpg"}/>
     </header>
 }
 export default Header
