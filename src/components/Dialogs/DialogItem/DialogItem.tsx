@@ -1,5 +1,5 @@
 import React from "react";
-import style from './../Dialogs.module.css';
+import style from "./DialogItem.module.css"
 import {NavLink} from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ type DialogItemPropsType={
 
 
 const DialogItem = (props: DialogItemPropsType) => {
-    return <div className={style.dialog}>
+    return <div className={style.dialogItems}>
         <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
     </div>
 }

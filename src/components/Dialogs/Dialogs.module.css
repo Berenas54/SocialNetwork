@@ -2,26 +2,12 @@
     display: grid;
     grid-template-columns: 2fr 10fr;
 }
-
-.dialogItems {
-    padding: 10px;
-
+.answerField {
+    margin-top: 10px;
+    display: flex;
 }
-
-.dialogItems .active {
-    color: gold;
-}
-
-.dialogItems a {
-    text-decoration: none;
-    color: black;
-}
-
-
-.messages {
-    padding: 10px;
-}
-
-.message {
-
+.inputMessage {
+    margin-right:5px;
+    max-width: 250px;
+    max-height: 100px;
 }
