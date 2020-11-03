@@ -35,6 +35,22 @@ let state: RootStateType = {
         ]
     }
 }
+ export let addPost= (postMessage:string)=>{
+    let newPost: PostType = {
+        id:7,
+        message:postMessage,
+        likesCount:0
+    }
+    state.profilePage.posts.push(newPost)
+}
+export let addMessage=(message:string)=>{
+    let newMessage: MessageType ={
+        id:6,
+        message:message
+    }
+    state.messagesPage.messages.push(newMessage)
+}
+
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
 }
