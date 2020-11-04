@@ -14,8 +14,11 @@ const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
     let addPost = () => {
         if (newPostElement.current){
-        let text = newPostElement.current?.value; //32 lessons
-        props.addPost(text)}
+        let text = newPostElement.current.value;
+        props.addPost(text)
+            newPostElement.current.value = ""
+        }
+
     }
 
     return <div className={style.item}>

@@ -18,9 +18,10 @@ const Dialogs = (props: DialogsPropsType) => {
 
     let newMessage = () => {
         if (newMessageElement.current) {
-            let text = newMessageElement.current?.value
+            let text = newMessageElement.current.value
             props.addMessage(text)
-        }console.log(props.messagesPage.messages)
+            newMessageElement.current.value=""
+        }
     }
 
     return (
@@ -35,7 +36,6 @@ const Dialogs = (props: DialogsPropsType) => {
                     <button onClick={newMessage}>Send</button>
                 </div>
             </div>
-
         </div>
     )
 }

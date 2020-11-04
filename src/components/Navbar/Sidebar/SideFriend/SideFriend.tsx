@@ -3,7 +3,7 @@ import style from "./SideFriend.module.css"
 import {NavLink} from "react-router-dom";
 
 type SideFriendPropsType = {
-    id: number
+    id: string
     avatar: string
     name: string
 }

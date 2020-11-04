@@ -1,35 +1,38 @@
+import {rerenderEntireTree} from "../render";
+import {v1} from "uuid";
+
 let state: RootStateType = {
     profilePage: {
         posts: [
-            {id: 1, message: "My first post!", likesCount: 41},
-            {id: 2, message: "Second post", likesCount: 22},
-            {id: 3, message: 'I live React', likesCount: 31},
-            {id: 4, message: "Awesome!!!", likesCount: 421}],
+            {id: v1(), message: "My first post!", likesCount: 41},
+            {id: v1(), message: "Second post", likesCount: 22},
+            {id: v1(), message: 'I live React', likesCount: 31},
+            {id: v1(), message: "Awesome!!!", likesCount: 421}],
     },
     messagesPage: {
         messages: [
-            {id: 1, message: "HI, brother!"},
-            {id: 2, message: "Wtf"},
-            {id: 3, message: "I love you"},
-            {id: 4, message: "Where is my money?"},
+            {id: v1(), message: "HI, brother!"},
+            {id: v1(), message: "Wtf"},
+            {id: v1(), message: "I love you"},
+            {id: v1(), message: "Where is my money?"},
         ],
         dialogs: [
-            {id: 1, name: "Dzimych"},
-            {id: 2, name: "Sveta"},
-            {id: 3, name: "Pasha"},
-            {id: 4, name: "Gleb"},
-            {id: 5, name: "Vika"}
+            {id: v1(), name: "Dzimych"},
+            {id: v1(), name: "Sveta"},
+            {id: v1(), name: "Pasha"},
+            {id: v1(), name: "Gleb"},
+            {id: v1(), name: "Vika"}
         ]
     },
     asideState: {
         asideFriends: [
-            {id: 1,
+            {id: v1(),
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6Ghz_3vVX362NspWGVByszfbkVlJ77tisTQ&usqp=CAU',
                 name: 'Pavel'},
-            {id: 2,
+            {id: v1(),
                 avatar: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg',
                 name: 'Vika'},
-            {id: 3,
+            {id: v1(),
                 avatar: 'https://tiktok-wiki.ru/wp-content/uploads/2020/05/avatarki-dlya-tik-toka1.jpg',
                 name: 'Alex'}
         ]
@@ -37,38 +40,40 @@ let state: RootStateType = {
 }
  export let addPost= (postMessage:string)=>{
     let newPost: PostType = {
-        id:7,
+        id:v1(),
         message:postMessage,
         likesCount:0
     }
     state.profilePage.posts.push(newPost)
+     rerenderEntireTree(state)
 }
 export let addMessage=(message:string)=>{
     let newMessage: MessageType ={
-        id:6,
+        id:v1(),
         message:message
     }
     state.messagesPage.messages.push(newMessage)
+    rerenderEntireTree(state)
 }
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
 }
 export type  AsideFriendsType = {
-    id:number
+    id:string
     avatar:string
     name:string
 }
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
