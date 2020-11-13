@@ -9,8 +9,9 @@ import {Route} from 'react-router-dom';
 
 type AppStatePropsType = {
     state: RootStateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
     addMessage: (message: string) => void
+    updatePostText:(newText:string) => void
 }
 
 function App(props: AppStatePropsType) {
@@ -20,7 +21,7 @@ function App(props: AppStatePropsType) {
             <div className="app_wrapper_content">
                 <Route path='/dialogs' render={() => <Dialogs messagesPage={props.state.messagesPage} addMessage={props.addMessage}/>}/>
                 <Route path='/profile'
-                       render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
+                       render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updatePostText={props.updatePostText}/>}/>
             </div>
         </div>
     );

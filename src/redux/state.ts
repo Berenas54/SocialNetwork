@@ -8,6 +8,7 @@ let state: RootStateType = {
             {id: v1(), message: "Second post", likesCount: 22},
             {id: v1(), message: 'I live React', likesCount: 31},
             {id: v1(), message: "Awesome!!!", likesCount: 421}],
+        newPostText: ""
     },
     messagesPage: {
         messages: [
@@ -26,31 +27,43 @@ let state: RootStateType = {
     },
     asideState: {
         asideFriends: [
-            {id: v1(),
+            {
+                id: v1(),
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6Ghz_3vVX362NspWGVByszfbkVlJ77tisTQ&usqp=CAU',
-                name: 'Pavel'},
-            {id: v1(),
+                name: 'Pavel'
+            },
+            {
+                id: v1(),
                 avatar: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg',
-                name: 'Vika'},
-            {id: v1(),
+                name: 'Vika'
+            },
+            {
+                id: v1(),
                 avatar: 'https://tiktok-wiki.ru/wp-content/uploads/2020/05/avatarki-dlya-tik-toka1.jpg',
-                name: 'Alex'}
+                name: 'Alex'
+            }
         ]
     }
 }
- export let addPost= (postMessage:string)=>{
+export let addPost = () => {
     let newPost: PostType = {
-        id:v1(),
-        message:postMessage,
-        likesCount:0
+        id: v1(),
+        message: state.profilePage.newPostText,
+        likesCount: 0
     }
     state.profilePage.posts.push(newPost)
-     rerenderEntireTree(state)
+    state.profilePage.newPostText=""
+    rerenderEntireTree(state)
 }
-export let addMessage=(message:string)=>{
-    let newMessage: MessageType ={
-        id:v1(),
-        message:message
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+export let addMessage = (message: string) => {
+    let newMessage: MessageType = {
+        id: v1(),
+        message: message
     }
     state.messagesPage.messages.push(newMessage)
     rerenderEntireTree(state)
@@ -60,9 +73,9 @@ export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
 }
 export type  AsideFriendsType = {
-    id:string
-    avatar:string
-    name:string
+    id: string
+    avatar: string
+    name: string
 }
 export type MessageType = {
     id: string
@@ -79,6 +92,7 @@ export type PostType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 export type MessagesPageType = {
     messages: Array<MessageType>
