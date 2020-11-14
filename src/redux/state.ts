@@ -1,7 +1,42 @@
 import {rerenderEntireTree} from "../render";
 import {v1} from "uuid";
 
-let state: RootStateType = {
+export type  AsideStateType = {
+    asideFriends: Array<AsideFriendsType>
+}
+export type  AsideFriendsType = {
+    id: string
+    avatar: string
+    name: string
+}
+export type MessageType = {
+    id: string
+    message: string
+}
+export type DialogType = {
+    id: string
+    name: string
+}
+export type PostType = {
+    id: string
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+export type MessagesPageType = {
+    messages: Array<MessageType>
+    dialogs: Array<DialogType>
+}
+export type RootStateType = {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
+    asideState: AsideStateType
+}
+
+export let state: RootStateType = {
     profilePage: {
         posts: [
             {id: v1(), message: "My first post!", likesCount: 41},
@@ -45,6 +80,7 @@ let state: RootStateType = {
         ]
     }
 }
+
 export let addPost = () => {
     let newPost: PostType = {
         id: v1(),
@@ -59,7 +95,6 @@ export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }
-
 export let addMessage = (message: string) => {
     let newMessage: MessageType = {
         id: v1(),
@@ -69,40 +104,5 @@ export let addMessage = (message: string) => {
     rerenderEntireTree(state)
 }
 
-export type  AsideStateType = {
-    asideFriends: Array<AsideFriendsType>
-}
-export type  AsideFriendsType = {
-    id: string
-    avatar: string
-    name: string
-}
-export type MessageType = {
-    id: string
-    message: string
-}
-export type DialogType = {
-    id: string
-    name: string
-}
-export type PostType = {
-    id: string
-    message: string
-    likesCount: number
-}
-export type ProfilePageType = {
-    posts: Array<PostType>
-    newPostText: string
-}
-export type MessagesPageType = {
-    messages: Array<MessageType>
-    dialogs: Array<DialogType>
-}
-export type RootStateType = {
-    profilePage: ProfilePageType
-    messagesPage: MessagesPageType
-    asideState: AsideStateType
-}
 
 
-export default state

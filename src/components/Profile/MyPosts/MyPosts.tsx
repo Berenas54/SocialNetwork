@@ -11,7 +11,7 @@ type MyPostsPropsType = {
     newPostText: string
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
     let postsElement = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     const addPost = () => {
@@ -39,4 +39,3 @@ const MyPosts = (props: MyPostsPropsType) => {
         {postsElement}
     </div>
 }
-export default MyPosts

@@ -10,3 +10,7 @@
     text-decoration: none;
     color: black;
 }
+
+.dialogItems a.activeLink {
+    font-family: "Lucida Calligraphy", serif;
+}

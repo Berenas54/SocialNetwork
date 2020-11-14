@@ -2,7 +2,7 @@ import React from 'react';
 import style from './DescriptionBlock.module.css';
 
 
-const DescriptionBlock = () => {
+export const DescriptionBlock = () => {
     return <div>
         <div>
             <img className={style.background} alt='cats'
@@ -17,5 +17,3 @@ const DescriptionBlock = () => {
         </div>
     </div>
 }
-
-export default DescriptionBlock

@@ -1,7 +1,7 @@
 import React, {RefObject} from "react";
 import style from './Dialogs.module.css';
-import DialogItem from "./DialogItem/DialogItem";
-import Messages from "./Messages/Messages";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Messages} from "./Messages/Messages";
 import {MessagesPageType} from "../../redux/state";
 
 type DialogsPropsType = {
@@ -9,7 +9,7 @@ type DialogsPropsType = {
     addMessage: (message: string) => void
 }
 
-const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = props.messagesPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
 
     let messagesElement = props.messagesPage.messages.map(message => <Messages message={message.message}/>)
@@ -20,7 +20,7 @@ const Dialogs = (props: DialogsPropsType) => {
         if (newMessageElement.current) {
             let text = newMessageElement.current.value
             props.addMessage(text)
-            newMessageElement.current.value=""
+            newMessageElement.current.value = ""
         }
     }
 
@@ -39,4 +39,3 @@ const Dialogs = (props: DialogsPropsType) => {
         </div>
     )
 }
-export default Dialogs

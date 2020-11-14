@@ -1,8 +1,7 @@
 import React from 'react';
 import style from './Sidebar.module.css';
-import SideFriend from "./SideFriend/SideFriend";
+import {SideFriend} from "./SideFriend/SideFriend";
 import {AsideStateType} from "../../../redux/state";
-
 
 type SidebarPropsType = {
     asideState: AsideStateType
@@ -13,15 +12,12 @@ const Sidebar = (props: SidebarPropsType) => {
                                                                                        name={friends.name}
                                                                                        avatar={friends.avatar}/>)
     return <aside className={style.aside}>
-
         <div className={style.asideH}>
             <h3>Friends</h3>
         </div>
         <div className={style.wrapperAside}>
             {friendsAsideElement}
         </div>
-
-
     </aside>
 }
 export default Sidebar

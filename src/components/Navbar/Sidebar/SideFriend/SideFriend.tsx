@@ -7,7 +7,7 @@ type SideFriendPropsType = {
     avatar: string
     name: string
 }
-const SideFriend = (props: SideFriendPropsType) => {
+export const SideFriend = (props: SideFriendPropsType) => {
     return <aside className={style.side}>
         <div className={style.figure}>
 
@@ -20,4 +20,4 @@ const SideFriend = (props: SideFriendPropsType) => {
         </div>
     </aside>
 }
-export default SideFriend
+
