@@ -1,4 +1,3 @@
-import {rerenderEntireTree} from "../render";
 import {v1} from "uuid";
 
 export type  AsideStateType = {
@@ -36,6 +35,9 @@ export type RootStateType = {
     asideState: AsideStateType
 }
 
+let rerenderEntireTree = () => {
+
+}
 export let state: RootStateType = {
     profilePage: {
         posts: [
@@ -81,28 +83,31 @@ export let state: RootStateType = {
     }
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost: PostType = {
         id: v1(),
         message: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText=""
-    rerenderEntireTree(state)
+    state.profilePage.newPostText = ""
+    rerenderEntireTree()
 }
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
-export let addMessage = (message: string) => {
+export const addMessage = (message: string) => {
     let newMessage: MessageType = {
         id: v1(),
         message: message
     }
     state.messagesPage.messages.push(newMessage)
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer
+}
 
 

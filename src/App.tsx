@@ -11,7 +11,7 @@ type AppStatePropsType = {
     state: RootStateType
     addPost: () => void
     addMessage: (message: string) => void
-    updatePostText:(newText:string) => void
+    updatePostText: (newText: string) => void
 }
 
 function App(props: AppStatePropsType) {
@@ -19,9 +19,11 @@ function App(props: AppStatePropsType) {
             <Header/>
             <Navbar state={props.state}/>
             <div className="app_wrapper_content">
-                <Route path='/dialogs' render={() => <Dialogs messagesPage={props.state.messagesPage} addMessage={props.addMessage}/>}/>
+                <Route path='/dialogs'
+                       render={() => <Dialogs messagesPage={props.state.messagesPage} addMessage={props.addMessage}/>}/>
                 <Route path='/profile'
-                       render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updatePostText={props.updatePostText}/>}/>
+                       render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}
+                                              updatePostText={props.updatePostText}/>}/>
             </div>
         </div>
     );
