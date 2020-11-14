@@ -12,17 +12,17 @@ type MyPostsPropsType = {
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
-    let postsElement = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
+    const postsElement = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     const addPost = () => {
         if (props.newPostText.trim()) {
             props.addPost(props.newPostText)
-        } else {
-            props.updatePostText("")
-        }
-    }
+} else {
+    props.updatePostText("")
+}
+}
 
-    const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.updatePostText(event.currentTarget.value)
     }
 
