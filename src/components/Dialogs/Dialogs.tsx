@@ -2,12 +2,16 @@ import React, {ChangeEvent} from "react";
 import style from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Messages} from "./Messages/Messages";
-import {MessagesPageType} from "../../redux/state";
+import {
+    ActionsTypes,
+    addMessageActionCreator,
+    MessagesPageType,
+    updateNewMessageTextActionCreator
+} from "../../redux/state";
 
 type DialogsPropsType = {
     messagesPage: MessagesPageType
-    addMessage: (message: string) => void
-    updateNewMessageText: (newText: string) => void
+    dispatch:(action:ActionsTypes)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -17,14 +21,17 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const newMessage = () => {
         if (props.messagesPage.newMessageText.trim()) {
-            props.addMessage(props.messagesPage.newMessageText)
+            props.dispatch(addMessageActionCreator(props.messagesPage.newMessageText))
+            //props.addMessage(props.messagesPage.newMessageText)// dispatch 'ADD-MESSAGE'
         } else {
-            props.updateNewMessageText("")
+            props.dispatch(updateNewMessageTextActionCreator(""))
+           // props.updateNewMessageText("")// dispatch 'UPDATE-NEW-MESSAGE-TEXT'
         }
     }
 
     const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageText(event.currentTarget.value)
+        props.dispatch(updateNewMessageTextActionCreator(event.currentTarget.value))
+       // props.updateNewMessageText(event.currentTarget.value)// dispatch
     }
     return (
         <div className={style.dialogs}>

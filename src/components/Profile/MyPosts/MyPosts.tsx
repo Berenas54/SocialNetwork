@@ -1,14 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import style from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from '../../../redux/state';
+import {ActionsTypes, addPostActionCreator, PostType, updateNewPostActionCreator} from '../../../redux/state';
 
 
 type MyPostsPropsType = {
     posts: PostType[]
-    addPost: (newPostText: string) => void
-    updatePostText: (newText: string) => void
     newPostText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -16,14 +15,17 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
         if (props.newPostText.trim()) {
-            props.addPost(props.newPostText)
-} else {
-    props.updatePostText("")
-}
-}
+            props.dispatch(addPostActionCreator(props.newPostText))//addPostActionCreator(props.newPostText)
+            //props.addPost(props.newPostText)
+        } else {
+            props.dispatch(updateNewPostActionCreator(""))//updateNewPostActionCreator
+            //props.updatePostText("")
+        }
+    }
 
-const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePostText(event.currentTarget.value)
+    const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        //props.updatePostText(event.currentTarget.value)
+        props.dispatch(updateNewPostActionCreator(event.currentTarget.value))//dispatch?
     }
 
     return <div className={style.item}>
