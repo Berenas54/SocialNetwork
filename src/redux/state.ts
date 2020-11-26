@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {profilePageReducer} from "./profilePage-reducer";
+import {messagesPageReducer} from "./messagesPage-reducer";
+import {asideReducer} from "./aside-reducer";
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
@@ -46,19 +49,19 @@ export type StoreType = {
 }
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | UpdateNewMessageTextType | AddMessageType
 
-type AddPostActionType = {
+export type AddPostActionType = {
     type: "ADD-POST"
     postText: string
 }
-type UpdateNewPostTextType = {
+export type UpdateNewPostTextType = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
-type UpdateNewMessageTextType = {
+export type UpdateNewMessageTextType = {
     type: "UPDATE-NEW-MESSAGE-TEXT"
     newText: string
 }
-type AddMessageType = {
+export type AddMessageType = {
     type: "ADD-MESSAGE"
     messageText: string
 }
@@ -119,51 +122,15 @@ export let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostType = {
-                id: v1(),
-                message: action.postText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.messagesPage.newMessageText = action.newText
-            this._callSubscriber()
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MessageType = {
-                id: v1(),
-                message: action.messageText
-            }
-            this._state.messagesPage.messages.push(newMessage)
-            this._state.messagesPage.newMessageText = ""
-            this._callSubscriber()
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+        this._state.asideState = asideReducer(this._state.asideState, action)
+        this._callSubscriber()
     },
 }
 
-export const addPostActionCreator = (text: string): AddPostActionType => ({
-    type: 'ADD-POST',
-    postText: text
-})
 
-export const updateNewPostActionCreator = (text: string): UpdateNewPostTextType =>
-    ({
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: text
-    })
-export const addMessageActionCreator = (text:string):AddMessageType => ({
-    type: 'ADD-MESSAGE',
-    messageText: text
-})
-export const updateNewMessageTextActionCreator = (text:string):UpdateNewMessageTextType=>({
-    type:'UPDATE-NEW-MESSAGE-TEXT',
-    newText: text
-})
+
 
 
 
