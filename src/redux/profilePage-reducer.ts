@@ -1,7 +1,15 @@
 import {v1} from "uuid";
-import {ActionsTypes, AddPostActionType, PostType, ProfilePageType, UpdateNewPostTextType} from "./state";
+import {ActionsTypes, AddPostActionType, PostType, ProfilePageType, UpdateNewPostTextType} from "./store";
 
-export const profilePageReducer = (state: ProfilePageType, action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: v1(), message: "My first post!", likesCount: 41},
+        {id: v1(), message: "Second post", likesCount: 22},
+        {id: v1(), message: 'I live React', likesCount: 31},
+        {id: v1(), message: "Awesome!!!", likesCount: 421}],
+    newPostText: ""
+}
+export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostType = {

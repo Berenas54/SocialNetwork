@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Sidebar.module.css';
 import {SideFriend} from "./SideFriend/SideFriend";
-import {AsideStateType} from "../../../redux/state";
+import {AsideStateType} from "../../../redux/store";
 
 type SidebarPropsType = {
     asideState: AsideStateType

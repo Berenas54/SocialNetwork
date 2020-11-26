@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
-import { RootStateType} from "../../redux/state";
+import { RootStateType} from "../../redux/store";
 
 type AppStatePropsType= {
     state:RootStateType}
