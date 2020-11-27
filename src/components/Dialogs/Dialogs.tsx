@@ -3,34 +3,35 @@ import style from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Messages} from "./Messages/Messages";
 import {
-    ActionsTypes,
     MessagesPageType,
 } from "../../redux/store";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/messagesPage-reducer";
 
 type DialogsPropsType = {
     messagesPage: MessagesPageType
-    dispatch:(action:ActionsTypes)=>void
+    sendMessage: () => void
+    updateNewMessageBody: (body: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
+
     const dialogsElement = props.messagesPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
 
     const messagesElement = props.messagesPage.messages.map(message => <Messages message={message.message}/>)
 
-    const newMessage = () => {
-        if (props.messagesPage.newMessageText.trim()) {
-            props.dispatch(addMessageActionCreator(props.messagesPage.newMessageText))
-            //props.addMessage(props.messagesPage.newMessageText)// dispatch 'ADD-MESSAGE'
-        } else {
-            props.dispatch(updateNewMessageTextActionCreator(""))
-           // props.updateNewMessageText("")// dispatch 'UPDATE-NEW-MESSAGE-TEXT'
-        }
+    const addNewMessage = () => {
+        props.sendMessage()
+        //     if (props.messagesPage.newMessageText.trim()) {
+        //         //props.addMessageActionCreator()
+        //     } else {
+        //         //props.dispatch(updateNewMessageTextActionCreator(""))
+        //     }
     }
 
-    const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageTextActionCreator(event.currentTarget.value))
-       // props.updateNewMessageText(event.currentTarget.value)// dispatch
+    const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = event.currentTarget.value
+        props.updateNewMessageBody(body)
+        //props.dispatch(updateNewMessageTextActionCreator(body))
+
     }
     return (
         <div className={style.dialogs}>
@@ -40,8 +41,9 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={style.messages}>
                 {messagesElement}
                 <div className={style.answerField}>
-                    <textarea value={props.messagesPage.newMessageText} onChange={changeHandler} className={style.inputMessage}/>
-                    <button onClick={newMessage}>Send</button>
+                    <textarea value={props.messagesPage.newMessageText} onChange={onNewMessageChange}
+                              className={style.inputMessage}/>
+                    <button onClick={addNewMessage}>Send</button>
                 </div>
             </div>
         </div>

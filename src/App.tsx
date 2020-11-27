@@ -3,9 +3,9 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs"
 import {ActionsTypes, RootStateType} from './redux/store'
 import {Route} from 'react-router-dom';
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppStatePropsType = {
     state: RootStateType
@@ -18,9 +18,10 @@ function App(props: AppStatePropsType) {
             <Navbar state={props.state}/>
             <div className="app_wrapper_content">
                 <Route path='/dialogs'
-                       render={() => <Dialogs messagesPage={props.state.messagesPage} dispatch={props.dispatch}/>}/>
+                       render={() => <DialogsContainer messagesPage={props.state.messagesPage}
+                                                       dispatch={props.dispatch}/>}/>
                 <Route path='/profile'
-                       render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
+                       render={() => <Profile state={props.state} dispatch={props.dispatch}/>}/>
             </div>
         </div>
     );

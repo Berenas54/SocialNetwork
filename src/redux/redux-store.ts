@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore, Store} from "redux";
 import {asideReducer} from "./aside-reducer";
 import {messagesPageReducer} from "./messagesPage-reducer";
 import {profilePageReducer} from "./profilePage-reducer";
@@ -8,5 +8,5 @@ let reducers = combineReducers({
     messagesPage: messagesPageReducer,
     profilePage: profilePageReducer
 })
-
-export let store = createStore(reducers)
+//type RootStateType = ReturnType<typeof reducers>
+export let store: Store = createStore(reducers)
