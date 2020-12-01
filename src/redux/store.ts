@@ -63,7 +63,7 @@ export type UpdateNewMessageTextType = {
 }
 export type AddMessageType = {
     type: "ADD-MESSAGE"
-    messageText: string
+
 }
 export let store: StoreType = {
     _state: {

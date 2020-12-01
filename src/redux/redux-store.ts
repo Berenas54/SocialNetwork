@@ -10,3 +10,6 @@ let reducers = combineReducers({
 })
 //type RootStateType = ReturnType<typeof reducers>
 export let store: Store = createStore(reducers)
+
+// @ts-ignore
+window.store = store
