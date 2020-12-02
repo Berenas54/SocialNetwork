@@ -18,7 +18,7 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
                 likesCount: 0
             }
             let stateCopy={...state}
-            stateCopy.posts = {...state.posts}
+            stateCopy.posts = [...state.posts]
             stateCopy.posts.push(newPost)
             stateCopy.newPostText = ""
             return stateCopy

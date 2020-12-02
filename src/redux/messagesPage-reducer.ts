@@ -32,7 +32,7 @@ export const messagesPageReducer = (state: MessagesPageType = initialState, acti
             stateCopy.newMessageText = '';
             stateCopy.messages = [...state.messages]
             stateCopy.messages.push({id: v1(), message: body}); //возможно ошибка с v1
-            return state;
+            return stateCopy;
         default:
             return state
     }
