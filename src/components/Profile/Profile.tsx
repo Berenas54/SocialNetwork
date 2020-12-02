@@ -1,18 +1,12 @@
 import React from 'react';
 import {DescriptionBlock} from "./ProfileInfo/DescriptionBlock";
-import {ActionsTypes, RootStateType} from "../../redux/store";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-
-type ProfilePropsType = {
-    state: RootStateType
-    dispatch: (action: ActionsTypes) => void
-}
+import { SuperMyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = () => {
     return <div>
         <DescriptionBlock/>
-        <MyPostsContainer state={props.state} dispatch={props.dispatch} />
+        <SuperMyPostsContainer />
     </div>
 }
 

@@ -18,14 +18,11 @@ export const Dialogs = (props: DialogsPropsType) => {
     const messagesElement = props.dialogsPage.messages.map(message => <Messages message={message.message}/>)
 
     const addNewMessage = () => {
-        // props.sendMessage()
-            if (props.dialogsPage.newMessageText.trim()) {
-                props.sendMessage()
-                //props.addMessageActionCreator()
-            } else {
-                //props.dispatch(updateNewMessageTextActionCreator(""))
-                props.updateNewMessageBody("")
-            }
+        if (props.dialogsPage.newMessageText.trim()) {
+            props.sendMessage()
+        } else {
+            props.updateNewMessageBody("")
+        }
     }
 
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

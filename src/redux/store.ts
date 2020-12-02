@@ -51,7 +51,6 @@ export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | UpdateNew
 
 export type AddPostActionType = {
     type: "ADD-POST"
-    postText: string
 }
 export type UpdateNewPostTextType = {
     type: "UPDATE-NEW-POST-TEXT"

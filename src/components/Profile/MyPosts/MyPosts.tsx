@@ -1,22 +1,20 @@
 import React, {ChangeEvent} from 'react';
 import style from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ActionsTypes, PostType} from '../../../redux/store';
+import {ProfilePageType} from '../../../redux/store';
 
 
 type MyPostsPropsType = {
-    posts: PostType[]
-    newPostText: string
-    dispatch: (action: ActionsTypes) => void
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+    profilePage: ProfilePageType,
+    updateNewPostText:(text:string)=>void,
+    addPost:()=>void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
-    const postsElement = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
+    const postsElement =props.profilePage.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     const onAddPost = () => {
-        if (props.newPostText.trim()) {
+        if (props.profilePage.newPostText.trim()) {
             props.addPost()
             // props.dispatch(addPostActionCreator(props.newPostText))
         } else {
@@ -35,7 +33,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <h3>My posts</h3>
         <div className={style.postAdding}>
             <div>
-                <textarea value={props.newPostText} onChange={onPostChange}/>
+                <textarea value={props.profilePage.newPostText} onChange={onPostChange}/>
             </div>
             <div>
                 <button onClick={onAddPost}>Add post</button>
