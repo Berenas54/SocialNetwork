@@ -13,14 +13,6 @@ type MDTPType = {
     addPost: () => void
 }
 
-type PropsType = MSTPType & MDTPType
-
-
-export const MyPostsContainer = (props: PropsType) => {
-    return (
-        <MyPosts profilePage={props.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
-    )
-}
 let mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         profilePage: state.profilePage
@@ -37,4 +29,4 @@ let mapDispatchToProps = (dispatch: (actions: ActionsTypes) => void): MDTPType =
     }
 }
 
-export const SuperMyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer)
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

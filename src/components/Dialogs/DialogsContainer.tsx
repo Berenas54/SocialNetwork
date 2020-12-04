@@ -1,4 +1,3 @@
-import React from "react";
 import {
     ActionsTypes,
     MessagesPageType, RootStateType,
@@ -14,18 +13,6 @@ type MSTPType = {
 type MDTPType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
-}
-
-type PropsType = MSTPType & MDTPType
-
-export const DialogsContainer = (props: PropsType) => {
-    return (
-        <Dialogs
-            updateNewMessageBody={props.updateNewMessageBody}
-            sendMessage={props.sendMessage}
-            dialogsPage={props.dialogsPage}
-        />
-    )
 }
 
 let mapStateToProps = (state: RootStateType): MSTPType => {
@@ -44,4 +31,4 @@ let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType =>
     }
 }
 
-export const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsContainer)
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

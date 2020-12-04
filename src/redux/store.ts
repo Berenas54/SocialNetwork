@@ -2,6 +2,8 @@ import {v1} from "uuid";
 import {profilePageReducer} from "./profilePage-reducer";
 import {messagesPageReducer} from "./messagesPage-reducer";
 import {asideReducer} from "./aside-reducer";
+import {UsersType} from "../components/Users/Users";
+import {FOLLOW, UNFOLLOW, SET_USERS} from "./users-reducer";
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
@@ -47,7 +49,14 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 
 }
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | UpdateNewMessageTextType | AddMessageType
+export type ActionsTypes =
+    AddPostActionType
+    | UpdateNewPostTextType
+    | UpdateNewMessageTextType
+    | AddMessageType
+    | Follow
+    | Unfollow
+    | SetUsers
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -63,6 +72,18 @@ export type UpdateNewMessageTextType = {
 export type AddMessageType = {
     type: "ADD-MESSAGE"
 
+}
+export type Follow = {
+    type: typeof FOLLOW,
+    userId: string
+}
+export type Unfollow = {
+    type: typeof UNFOLLOW
+    userId: string
+}
+export type SetUsers = {
+    type: typeof SET_USERS,
+    users: Array<UsersType>
 }
 export let store: StoreType = {
     _state: {
@@ -120,7 +141,7 @@ export let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
-    dispatch(action:ActionsTypes) {
+    dispatch(action: ActionsTypes) {
         this._state.profilePage = profilePageReducer(this._state.profilePage, action)
         this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
         this._state.asideState = asideReducer(this._state.asideState, action)

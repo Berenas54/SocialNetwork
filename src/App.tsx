@@ -3,12 +3,16 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import { RootStateType} from './redux/store'
 import {Route} from 'react-router-dom';
-import {SuperDialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import UsersContainer from './components/Users/UsersContainer';
+import {ReduxRootStateType} from "./redux/redux-store";
+
+
+
 
 type AppStatePropsType = {
-    state: RootStateType
+    state: ReduxRootStateType
 }
 
 function App(props: AppStatePropsType) {
@@ -17,12 +21,12 @@ function App(props: AppStatePropsType) {
             <Navbar state={props.state}/>
             <div className="app_wrapper_content">
                 <Route path='/dialogs'
-                       render={() => <SuperDialogsContainer
-                           // messagesPage={props.state.messagesPage}
-                           //                             dispatch={props.dispatch}
-                       />}/>
+                       render={() => <DialogsContainer/>}/>
                 <Route path='/profile'
-                       render={() => <Profile />}/>
+                       render={() => <Profile/>}/>
+
+                <Route path='/users'
+                       render={() => <UsersContainer/>}/>
             </div>
         </div>
     );
