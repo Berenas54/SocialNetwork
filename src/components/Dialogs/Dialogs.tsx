@@ -14,8 +14,8 @@ type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const dialogsElement = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-    const messagesElement = props.dialogsPage.messages.map(message => <Messages message={message.message}/>)
+    const dialogsElement = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>)
+    const messagesElement = props.dialogsPage.messages.map(message => <Messages key={message.id} message={message.message}/>)
 
     const addNewMessage = () => {
         if (props.dialogsPage.newMessageText.trim()) {

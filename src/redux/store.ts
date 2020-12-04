@@ -120,7 +120,7 @@ export let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
-    dispatch(action) {
+    dispatch(action:ActionsTypes) {
         this._state.profilePage = profilePageReducer(this._state.profilePage, action)
         this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
         this._state.asideState = asideReducer(this._state.asideState, action)

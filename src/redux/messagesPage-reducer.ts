@@ -19,6 +19,7 @@ let initialState = {
     ]
 }
 export const messagesPageReducer = (state: MessagesPageType = initialState, action: ActionsTypes) => {
+
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
             return {
@@ -26,13 +27,12 @@ export const messagesPageReducer = (state: MessagesPageType = initialState, acti
                 newMessageText: action.newText
             }
         case "ADD-MESSAGE":
-            let stateCopy = {...state}
-            stateCopy.newMessageText = state.newMessageText
-            let body = stateCopy.newMessageText;
-            stateCopy.newMessageText = '';
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push({id: v1(), message: body}); //возможно ошибка с v1
-            return stateCopy;
+            let body = state.newMessageText;
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: v1(), message: body}]
+            }
         default:
             return state
     }
