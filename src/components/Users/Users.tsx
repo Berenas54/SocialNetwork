@@ -1,15 +1,20 @@
 import React from "react";
 import styles from "./users.module.css"
-import {v1} from "uuid";
+import axios from 'axios'
+import userPhoto from '../../../src/assets/image/user_photo.png'
 
 export type UsersType = {
-    photoUrl: string,
+    photos: {
+        small: string,
+        large: string
+    },
     id: string,
     followed: boolean,
-    fullName: string
+    name: string
     status: string,
-    location: { city: string, country: string }
+    location?: { city: string, country: string }
 }
+
 export type UsersPageType = {
     users: Array<UsersType>
 }
@@ -20,50 +25,26 @@ type UsersPropsType = {
     setUsers: (users: Array<UsersType>) => void,
     users: Array<UsersType>
 }
+type TestApiType = {
+    items: Array<UsersType>
+    totalCount: number
+    error: null
+}
+
 
 export let Users = (props: UsersPropsType) => {
-    debugger
     if (props.users.length === 0) {
-        props.setUsers([{
-            photoUrl: '',
-            id: v1(),
-            followed: false,
-            fullName: "Alex Paskevich",
-            status: "Wtf",
-            location: {city: "Minsk", country: 'Belarus'}
-        },
-            {
-                photoUrl: '',
-                id: v1(),
-                followed: false,
-                fullName: "Viktoria Sotnikova",
-                status: "Buy car",
-                location: {city: "Moscow", country: 'Russia'}
-            },
-            {
-                photoUrl: '',
-                id: v1(),
-                followed: true,
-                fullName: "Timur Vasilievich",
-                status: '',
-                location: {city: "Vitebsk", country: 'Belarus'}
-            },
-            {
-                photoUrl: '',
-                id: v1(),
-                followed: true,
-                fullName: "Rostislav Solnchev",
-                status: 'Lumen',
-                location: {city: "Kiev", country: 'Ukraine'}
-            },
-        ])
+
+        axios.get<TestApiType>("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            props.setUsers(response.data.items)
+        })
     }
     return <div>
         {props.users.map(u =>
                 <div key={u.id}>
         <span>
             <div>
-<img alt={"avatar"} src={u.photoUrl} className={styles.userPhoto}/>
+<img alt={"avatar"} src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
             </div>
             <div>{u.followed ? <button onClick={() => {
                 props.unfollow(u.id)
@@ -74,8 +55,8 @@ export let Users = (props: UsersPropsType) => {
             </div>
         </span>
                     <span>
-            <span><div>{u.fullName}</div><div>{u.status}</div></span>
-            <span><div>{u.location.country}</div><div>{u.location.city}</div></span>
+            <span><div>{u.name}</div><div>{u.status}</div></span>
+            <span><div>{"u.location.country"}</div><div>{"u.location.city"}</div></span>
         </span>
                 </div>
         )}
