@@ -1,4 +1,5 @@
-import {Users, UsersType} from "./Users";
+import { UsersType} from "./Users";
+import {Users} from "./Users";
 import {connect} from "react-redux";
 
 import {ReduxRootStateType} from "../../redux/redux-store";
