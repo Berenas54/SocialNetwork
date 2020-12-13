@@ -8,7 +8,7 @@ let reducers = combineReducers({
     asideState: asideReducer,
     messagesPage: messagesPageReducer,
     profilePage: profilePageReducer,
-    usersPage:usersReducer
+    usersPage: usersReducer
 })
 export type ReduxRootStateType = ReturnType<typeof reducers>
 export let store: Store = createStore(reducers)

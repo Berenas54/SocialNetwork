@@ -9,8 +9,6 @@ import UsersContainer from './components/Users/UsersContainer';
 import {ReduxRootStateType} from "./redux/redux-store";
 
 
-
-
 type AppStatePropsType = {
     state: ReduxRootStateType
 }

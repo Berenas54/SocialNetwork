@@ -1,4 +1,3 @@
-
 import {ActionsTypes, ProfilePageType, RootStateType} from '../../../redux/store';
 import {addPostActionCreator, updateNewPostActionCreator} from "../../../redux/profilePage-reducer";
 import {MyPosts} from "./MyPosts";

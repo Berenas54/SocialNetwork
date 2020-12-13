@@ -1,4 +1,4 @@
-import { UsersType} from "./Users";
+import {UsersType} from "./Users";
 import {Users} from "./Users";
 import {connect} from "react-redux";
 
