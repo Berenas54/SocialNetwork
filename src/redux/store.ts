@@ -3,7 +3,7 @@ import {profilePageReducer} from "./profilePage-reducer";
 import {messagesPageReducer} from "./messagesPage-reducer";
 import {asideReducer} from "./aside-reducer";
 import {UsersType} from "../components/Users/Users";
-import {FOLLOW, UNFOLLOW, SET_USERS} from "./users-reducer";
+import {FOLLOW, UNFOLLOW, SET_USERS, SET_CURRENT_PAGE, SET_TOTAL_USERS_COUNT} from "./users-reducer";
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
@@ -57,6 +57,8 @@ export type ActionsTypes =
     | Follow
     | Unfollow
     | SetUsers
+    | setCurrentPage
+    | setUsersTotalCountAC
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -84,6 +86,14 @@ export type Unfollow = {
 export type SetUsers = {
     type: typeof SET_USERS,
     users: Array<UsersType>
+}
+export type setCurrentPage = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+export type setUsersTotalCountAC = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    count: number
 }
 export let store: StoreType = {
     _state: {

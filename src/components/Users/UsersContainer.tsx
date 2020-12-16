@@ -4,21 +4,31 @@ import {connect} from "react-redux";
 
 import {ReduxRootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
-import {follow, setUsers, unfollow} from "../../redux/users-reducer";
+import {follow, setCurrentPageAC, setUsers, setUsersTotalCountAC, unfollow} from "../../redux/users-reducer";
 
 type MSTPType = {
-    users: any
+    users: any,
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage:number
+
 }
 
 type MDTPType = {
     follow: (userId: string) => void,
     unfollow: (userId: string) => void,
-    setUsers: (users: any) => void
+    setUsers: (users: any) => void,
+    setCurrentPage:(pageNumber:number)=>void,
+    setTotalUsersCount:(totalCount:number)=>void
+
 }
 
 let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
@@ -31,9 +41,13 @@ let mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
         },
         setUsers: (users: Array<UsersType>) => {
             dispatch(setUsers(users))
-
-
-        }
+        },
+        setCurrentPage: (pageNumber) => {
+            dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount: (totalCount) => {
+            dispatch(setUsersTotalCountAC(totalCount))
+        },
     }
 }
 
