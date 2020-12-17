@@ -2,8 +2,9 @@ import {v1} from "uuid";
 import {profilePageReducer} from "./profilePage-reducer";
 import {messagesPageReducer} from "./messagesPage-reducer";
 import {asideReducer} from "./aside-reducer";
-import {UsersType} from "../components/Users/Users";
+
 import {FOLLOW, UNFOLLOW, SET_USERS, SET_CURRENT_PAGE, SET_TOTAL_USERS_COUNT} from "./users-reducer";
+import { UsersType } from "../components/Users/UsersContainer";
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>

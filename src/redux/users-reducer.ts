@@ -1,5 +1,6 @@
-import {UsersPageType, UsersType} from "../components/Users/Users";
+
 import {ActionsTypes} from "./store";
+import { UsersType} from "../components/Users/UsersContainer";
 
 
 export const FOLLOW = 'FOLLOW'
@@ -7,6 +8,13 @@ export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+
+export type UsersPageType = {
+    users: Array<UsersType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number
+}
 
 let initialState: UsersPageType = {
     users: [],
