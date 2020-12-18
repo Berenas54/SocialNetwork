@@ -3,8 +3,15 @@ import {profilePageReducer} from "./profilePage-reducer";
 import {messagesPageReducer} from "./messagesPage-reducer";
 import {asideReducer} from "./aside-reducer";
 
-import {FOLLOW, UNFOLLOW, SET_USERS, SET_CURRENT_PAGE, SET_TOTAL_USERS_COUNT} from "./users-reducer";
-import { UsersType } from "../components/Users/UsersContainer";
+import {
+    FOLLOW,
+    UNFOLLOW,
+    SET_USERS,
+    SET_CURRENT_PAGE,
+    SET_TOTAL_USERS_COUNT,
+    TOGGLE_IS_FETCHING
+} from "./users-reducer";
+import {UsersType} from "../components/Users/UsersContainer";
 
 export type  AsideStateType = {
     asideFriends: Array<AsideFriendsType>
@@ -60,6 +67,7 @@ export type ActionsTypes =
     | SetUsers
     | setCurrentPage
     | setUsersTotalCountAC
+    | setIsFetchingAc
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -95,6 +103,10 @@ export type setCurrentPage = {
 export type setUsersTotalCountAC = {
     type: typeof SET_TOTAL_USERS_COUNT
     count: number
+}
+export type setIsFetchingAc = {
+    type: typeof TOGGLE_IS_FETCHING
+    isFetching: boolean
 }
 export let store: StoreType = {
     _state: {

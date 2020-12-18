@@ -1,16 +1,24 @@
 import {connect} from "react-redux";
 import {ReduxRootStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
-import {follow, setCurrentPageAC, setUsers, setUsersTotalCountAC, unfollow} from "../../redux/users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setUsers,
+    setTotalUsersCount,
+    unfollow
+} from "../../redux/users-reducer";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
+import {Preloader} from "../commons/Preloader/Preloader";
 
 type MSTPType = {
     users: any,
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 
 }
 
@@ -20,6 +28,7 @@ type MDTPType = {
     setUsers: (users: any) => void,
     setCurrentPage: (pageNumber: number) => void,
     setTotalUsersCount: (totalCount: number) => void
+    setIsFetching: (fetching: boolean) => void
 
 }
 export type UsersType = {
@@ -45,6 +54,8 @@ export type UsersContainerPropsType = {
     pageSize: number,
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
+    setIsFetching: (fetching: boolean) => void
 }
 type ResponseType = {
     items: Array<UsersType>
@@ -55,7 +66,9 @@ type ResponseType = {
 
 export class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
+        this.props.setIsFetching(true)
         axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
@@ -64,7 +77,9 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
+        this.props.setIsFetching(true)
         axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
         })
     }
@@ -72,14 +87,18 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
     render() {
 
 
-        return <Users totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage}
-                      onPageChanged={this.onPageChanged}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      users={this.props.users}
-        />
+        return <>
+            {this.props.isFetching ? <Preloader/> : null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   onPageChanged={this.onPageChanged}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   users={this.props.users}
+
+            />
+        </>
     }
 }
 
@@ -88,28 +107,12 @@ let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
-    }
-}
-let mapDispatchToProps = (dispatch: Dispatch): MDTPType => {
-    return {
-        follow: (userId: string) => {
-            dispatch(follow(userId))
-        },
-        unfollow: (userId: string) => {
-            dispatch(unfollow(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsers(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
-export default connect<MSTPType, MDTPType, {}, ReduxRootStateType>(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect<MSTPType, MDTPType, {}, ReduxRootStateType>(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsFetching
+})(UsersContainer)
 //export default connect(mapStateToProps, {follow, unfollow, setUsers})(Users)
