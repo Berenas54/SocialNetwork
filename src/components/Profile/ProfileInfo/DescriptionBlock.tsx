@@ -11,17 +11,18 @@ export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
-    return <div>
-        <div>
-            <img className={style.background} alt='cats'
-                 src='https://icatcare.org/app/uploads/2018/06/Layer-1704-1920x840.jpg'/>
-        </div>
+    return <div className={style.description}>
         <div>
             <img className={style.avatar} alt="ava"
                  src={props.profile.photos.large}/>
         </div>
-        <div className={style.description}>
-            Description
+        <h2>{props.profile.fullName}</h2>
+        <div>
+            <h4>Contacts:</h4>
+            <p>facebook:{props.profile.contacts.facebook}</p>
+        </div>
+        <div>
+            {props.profile.aboutMe}
         </div>
     </div>
 }
