@@ -1,8 +1,16 @@
 import React from 'react';
 import style from './DescriptionBlock.module.css';
+import {Preloader} from "../../commons/Preloader/Preloader";
+import {UserProfileType} from "../../../redux/profilePage-reducer";
 
+type DescriptionBlockPropsType = {
+    profile: UserProfileType
+}
 
-export const DescriptionBlock = () => {
+export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return <div>
         <div>
             <img className={style.background} alt='cats'
@@ -10,7 +18,7 @@ export const DescriptionBlock = () => {
         </div>
         <div>
             <img className={style.avatar} alt="ava"
-                 src='https://pm1.narvii.com/7171/f6f1c4463bbd9959052b699672858647f17660d3r1-264-250v2_00.jpg'/>
+                 src={props.profile.photos.large}/>
         </div>
         <div className={style.description}>
             Description

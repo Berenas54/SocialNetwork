@@ -1,12 +1,16 @@
 import React from 'react';
 import {DescriptionBlock} from "./ProfileInfo/DescriptionBlock";
-import { MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {UserProfileType} from "../../redux/profilePage-reducer";
 
+type ProfilePropsType = {
+    profile: UserProfileType
+}
 
-export const Profile = () => {
+export const Profile = (props: ProfilePropsType) => {
     return <div>
-        <DescriptionBlock/>
-        <MyPostsContainer />
+        <DescriptionBlock profile={props.profile}/>
+        <MyPostsContainer/>
     </div>
 }
 

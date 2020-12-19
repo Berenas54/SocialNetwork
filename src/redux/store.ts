@@ -1,8 +1,4 @@
-import {v1} from "uuid";
-import {profilePageReducer} from "./profilePage-reducer";
-import {messagesPageReducer} from "./messagesPage-reducer";
-import {asideReducer} from "./aside-reducer";
-
+import {SET_USER_PROFILE} from "./profilePage-reducer";
 import {
     FOLLOW,
     UNFOLLOW,
@@ -37,7 +33,31 @@ export type PostType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: UserProfileType | null
 }
+
+export type UserProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: string | number,
+    photos: {
+        small: string,
+        large: string
+    }
+}
+
 export type MessagesPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
@@ -49,14 +69,15 @@ export type RootStateType = {
     asideState: AsideStateType
 }
 
-export type StoreType = {
-    _state: RootStateType
-    subscribe: (callback: () => void) => void
-    _callSubscriber: () => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsTypes) => void
+// export type StoreType = {
+//     _state: RootStateType
+//     subscribe: (callback: () => void) => void
+//     _callSubscriber: () => void
+//     getState: () => RootStateType
+//     dispatch: (action: ActionsTypes) => void
+//
+// }
 
-}
 export type ActionsTypes =
     AddPostActionType
     | UpdateNewPostTextType
@@ -68,6 +89,7 @@ export type ActionsTypes =
     | setCurrentPage
     | setUsersTotalCountAC
     | setIsFetchingAc
+    | setUserProfile
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -108,69 +130,74 @@ export type setIsFetchingAc = {
     type: typeof TOGGLE_IS_FETCHING
     isFetching: boolean
 }
-export let store: StoreType = {
-    _state: {
-        profilePage: {
-            posts: [
-                {id: v1(), message: "My first post!", likesCount: 41},
-                {id: v1(), message: "Second post", likesCount: 22},
-                {id: v1(), message: 'I live React', likesCount: 31},
-                {id: v1(), message: "Awesome!!!", likesCount: 421}],
-            newPostText: ""
-        },
-        messagesPage: {
-            messages: [
-                {id: v1(), message: "HI, brother!"},
-                {id: v1(), message: "Wtf"},
-                {id: v1(), message: "I love you"},
-                {id: v1(), message: "Where is my money?"},
-
-            ],
-            newMessageText: "",
-            dialogs: [
-                {id: v1(), name: "Dzimych"},
-                {id: v1(), name: "Sveta"},
-                {id: v1(), name: "Pasha"},
-                {id: v1(), name: "Gleb"},
-                {id: v1(), name: "Vika"}
-            ]
-        },
-        asideState: {
-            asideFriends: [
-                {
-                    id: v1(),
-                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6Ghz_3vVX362NspWGVByszfbkVlJ77tisTQ&usqp=CAU',
-                    name: 'Pavel'
-                },
-                {
-                    id: v1(),
-                    avatar: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg',
-                    name: 'Vika'
-                },
-                {
-                    id: v1(),
-                    avatar: 'https://tiktok-wiki.ru/wp-content/uploads/2020/05/avatarki-dlya-tik-toka1.jpg',
-                    name: 'Alex'
-                }
-            ]
-        }
-    },
-    _callSubscriber() {
-        console.log('State changed')
-    },
-    getState() {
-        return this._state
-    },
-    subscribe(observer) {
-        this._callSubscriber = observer
-    },
-    dispatch(action: ActionsTypes) {
-        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
-        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
-        this._state.asideState = asideReducer(this._state.asideState, action)
-        this._callSubscriber()
-    },
+export type setUserProfile = {
+    type: typeof SET_USER_PROFILE
+    profile: UserProfileType
 }
+// export let store: StoreType = {
+//     _state: {
+//         profilePage: {
+//             posts: [
+//                 {id: v1(), message: "My first post!", likesCount: 41},
+//                 {id: v1(), message: "Second post", likesCount: 22},
+//                 {id: v1(), message: 'I live React', likesCount: 31},
+//                 {id: v1(), message: "Awesome!!!", likesCount: 421}],
+//             newPostText: ""
+//
+//         },
+//         messagesPage: {
+//             messages: [
+//                 {id: v1(), message: "HI, brother!"},
+//                 {id: v1(), message: "Wtf"},
+//                 {id: v1(), message: "I love you"},
+//                 {id: v1(), message: "Where is my money?"},
+//
+//             ],
+//             newMessageText: "",
+//             dialogs: [
+//                 {id: v1(), name: "Dzimych"},
+//                 {id: v1(), name: "Sveta"},
+//                 {id: v1(), name: "Pasha"},
+//                 {id: v1(), name: "Gleb"},
+//                 {id: v1(), name: "Vika"}
+//             ]
+//         },
+//         asideState: {
+//             asideFriends: [
+//                 {
+//                     id: v1(),
+//                     avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6Ghz_3vVX362NspWGVByszfbkVlJ77tisTQ&usqp=CAU',
+//                     name: 'Pavel'
+//                 },
+//                 {
+//                     id: v1(),
+//                     avatar: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg',
+//                     name: 'Vika'
+//                 },
+//                 {
+//                     id: v1(),
+//                     avatar: 'https://tiktok-wiki.ru/wp-content/uploads/2020/05/avatarki-dlya-tik-toka1.jpg',
+//                     name: 'Alex'
+//                 }
+//             ]
+//         }
+//     },
+//     _callSubscriber() {
+//         console.log('State changed')
+//     },
+//     getState() {
+//         return this._state
+//     },
+//     subscribe(observer) {
+//         this._callSubscriber = observer
+//     },
+//     dispatch(action: ActionsTypes) {
+//         this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+//         this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
+//         this._state.asideState = asideReducer(this._state.asideState, action)
+//         this._callSubscriber()
+//     },
+// }
 
 
 

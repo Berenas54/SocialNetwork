@@ -2,6 +2,8 @@ import React from "react";
 import userPhoto from "../../assets/image/user_photo.png";
 import styles from "./users.module.css";
 import {UsersType} from "./UsersContainer";
+import {NavLink} from "react-router-dom";
+
 
 export type UsersPropsType = {
     follow: (userId: string) => void,
@@ -32,7 +34,10 @@ export let Users = (props: UsersPropsType) => {
                 <div key={u.id}>
         <span>
             <div>
-<img alt={"avatar"} src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
+            <NavLink to={'/profile/' + u.id}>
+                <img alt={"avatar"} src={u.photos.small != null ? u.photos.small : userPhoto}
+                     className={styles.userPhoto}/>
+            </NavLink>
             </div>
             <div>{u.followed ? <button onClick={() => {
                 props.unfollow(u.id)
