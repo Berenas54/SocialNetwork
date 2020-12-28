@@ -3,6 +3,7 @@ import userPhoto from "../../assets/image/user_photo.png";
 import styles from "./users.module.css";
 import {UsersType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 export type UsersPropsType = {
@@ -13,8 +14,13 @@ export type UsersPropsType = {
     pageSize: number,
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-}
 
+}
+type UsersResponseType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {}
+}
 export let Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
@@ -40,9 +46,25 @@ export let Users = (props: UsersPropsType) => {
             </NavLink>
             </div>
             <div>{u.followed ? <button onClick={() => {
-                props.unfollow(u.id)
+                axios.delete<UsersResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                    withCredentials: true,
+                    headers: {"API-KEY": "ab5b5c28-df0c-45dc-8c95-5b7984c4931d"}
+                }).then(response => {
+                    if (response.data.resultCode === 0) {
+                        props.unfollow(u.id)
+                    }
+                })
+
             }}>Unfollow</button> : <button onClick={() => {
-                props.follow(u.id)
+                axios.post<UsersResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                    withCredentials: true,
+                    headers: {"API-KEY": "ab5b5c28-df0c-45dc-8c95-5b7984c4931d"}
+                }).then(response => {
+                    if (response.data.resultCode === 0) {
+                        props.follow(u.id)
+                    }
+                })
+
             }}>Follow</button>}
             </div>
         </span>
