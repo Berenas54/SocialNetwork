@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route} from 'react-router-dom';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from './components/Users/UsersContainer';
 import {ReduxRootStateType} from "./redux/redux-store";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 type AppStatePropsType = {
@@ -16,7 +15,7 @@ type AppStatePropsType = {
 
 function App(props: AppStatePropsType) {
     return (<div className='app_wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar state={props.state}/>
             <div className="app_wrapper_content">
                 <Route path='/dialogs'
