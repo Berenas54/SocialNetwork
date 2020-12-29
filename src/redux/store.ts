@@ -5,7 +5,7 @@ import {
     SET_USERS,
     SET_CURRENT_PAGE,
     SET_TOTAL_USERS_COUNT,
-    TOGGLE_IS_FETCHING
+    TOGGLE_IS_FETCHING, TOGGLE_IS_FOLLOWING_PROGRESS
 } from "./users-reducer";
 import {UsersType} from "../components/Users/UsersContainer";
 
@@ -90,6 +90,7 @@ export type ActionsTypes =
     | setUsersTotalCountAC
     | setIsFetchingAc
     | setUserProfile
+|ToggleIsFollowingProgress
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -129,6 +130,12 @@ export type setUsersTotalCountAC = {
 export type setIsFetchingAc = {
     type: typeof TOGGLE_IS_FETCHING
     isFetching: boolean
+}
+export type ToggleIsFollowingProgress = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    isFetching: boolean
+    userId:string
+
 }
 export type setUserProfile = {
     type: typeof SET_USER_PROFILE

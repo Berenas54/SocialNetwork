@@ -14,6 +14,9 @@ export type UsersPropsType = {
     pageSize: number,
     currentPage: number
     onPageChanged: (pageNumber: number) => void
+    toggleIsFollowingProgress: (isFetching: boolean, userId: string) => void
+    followingInProgress: Array<string>
+
 
 }
 
@@ -41,18 +44,23 @@ export let Users = (props: UsersPropsType) => {
                      className={styles.userPhoto}/>
             </NavLink>
             </div>
-            <div>{u.followed ? <button onClick={() => {
-               userAPI.unfollowUsers(u.id).then(response => {
+            <div>{u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                props.toggleIsFollowingProgress(true, u.id)
+                userAPI.unfollowUsers(u.id).then(response => {
                     if (response.data.resultCode === 0) {
                         props.unfollow(u.id)
-                    }//часть response не вынесена в api.ts
+                    }
+                    props.toggleIsFollowingProgress(false, u.id)
+                    //часть response не вынесена в api.ts
                 })
 
-            }}>Unfollow</button> : <button onClick={() => {
+            }}>Unfollow</button> : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                props.toggleIsFollowingProgress(true, u.id)
                 userAPI.followUsers(u.id).then(response => {
                     if (response.data.resultCode === 0) {
                         props.follow(u.id)
                     }
+                    props.toggleIsFollowingProgress(false, u.id)
                 })
             }}>Follow</button>}
             </div>
