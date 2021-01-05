@@ -83,14 +83,14 @@ export type ActionsTypes =
     | UpdateNewPostTextType
     | UpdateNewMessageTextType
     | AddMessageType
-    | Follow
-    | Unfollow
+    | FollowSuccess
+    | UnfollowSuccess
     | SetUsers
     | setCurrentPage
     | setUsersTotalCountAC
     | setIsFetchingAc
     | setUserProfile
-|ToggleIsFollowingProgress
+    | ToggleIsFollowingProgress
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -107,11 +107,11 @@ export type AddMessageType = {
     type: "ADD-MESSAGE"
 
 }
-export type Follow = {
+export type FollowSuccess = {
     type: typeof FOLLOW,
     userId: string
 }
-export type Unfollow = {
+export type UnfollowSuccess = {
     type: typeof UNFOLLOW
     userId: string
 }
@@ -134,7 +134,7 @@ export type setIsFetchingAc = {
 export type ToggleIsFollowingProgress = {
     type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
     isFetching: boolean
-    userId:string
+    userId: string
 
 }
 export type setUserProfile = {
