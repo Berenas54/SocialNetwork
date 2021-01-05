@@ -1,13 +1,15 @@
 import {
     ActionsTypes,
-    MessagesPageType, RootStateType,
+    MessagesPageType
 } from "../../redux/store";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/messagesPage-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
+import {ReduxRootStateType} from "../../redux/redux-store";
 
 type MSTPType = {
     dialogsPage: MessagesPageType
+    isAuth: boolean
 }
 
 type MDTPType = {
@@ -15,9 +17,10 @@ type MDTPType = {
     sendMessage: () => void
 }
 
-let mapStateToProps = (state: RootStateType): MSTPType => {
+let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
     return {
-        dialogsPage: state.messagesPage
+        dialogsPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType => {

@@ -7,6 +7,8 @@ import UsersContainer from './components/Users/UsersContainer';
 import {ReduxRootStateType} from "./redux/redux-store";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
+
 
 
 type AppStatePropsType = {
@@ -24,6 +26,9 @@ function App(props: AppStatePropsType) {
                        render={() => <ProfileContainer/>}/>
                 <Route path='/users'
                        render={() => <UsersContainer/>}/>
+                <Route path='/login'
+                       render={() => <Login/>}/>
+
             </div>
         </div>
     );

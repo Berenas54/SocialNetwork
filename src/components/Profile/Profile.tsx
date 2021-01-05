@@ -3,6 +3,7 @@ import {DescriptionBlock} from "./ProfileInfo/DescriptionBlock";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../redux/profilePage-reducer";
 
+
 export type ProfilePropsType = {
     profile: UserProfileType
 }
