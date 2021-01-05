@@ -41,7 +41,12 @@ export const userAPI = {
     followUsers(id: string) {
         return instance.post<UsersResponseType>(`follow/${id}`)
     },
-    getLogin() {
+    getProfile(id: string) {
+        return instance.get<any>(`profile/${id}`)
+    }
+}
+export const authAPI = {
+    me() {
         return instance.get<HeaderResponseType>(`auth/me`)
     }
 }

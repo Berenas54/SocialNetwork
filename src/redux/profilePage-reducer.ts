@@ -7,6 +7,9 @@ import {
     UpdateNewPostTextType,
 
 } from "./store";
+import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
+
 
 export type UserProfileType = {
     aboutMe: string,
@@ -23,7 +26,7 @@ export type UserProfileType = {
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    userId: string | number,
+    userId: string,
     photos: {
         small: string,
         large: string
@@ -88,3 +91,10 @@ export const updateNewPostActionCreator = (text: string): UpdateNewPostTextType 
         type: "UPDATE-NEW-POST-TEXT",
         newText: text
     })
+export const getUserProfile = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        userAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+    }
+}
