@@ -7,6 +7,7 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../commons/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type MSTPType = {
@@ -96,10 +97,11 @@ let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
     }
 }
 
+let withRedirect = withAuthRedirect(UsersContainer)
 export default connect<MSTPType, MDTPType, {}, ReduxRootStateType>(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
     getUsers
-})(UsersContainer)
+})(withRedirect)
 //export default connect(mapStateToProps, {follow, unfollow, setUsers})(Users)

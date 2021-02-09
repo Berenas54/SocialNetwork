@@ -1,15 +1,13 @@
-import {
-    ActionsTypes,
-    MessagesPageType
-} from "../../redux/store";
+import {ActionsTypes, MessagesPageType} from "../../redux/store";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/messagesPage-reducer";
-import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {ReduxRootStateType} from "../../redux/redux-store";
+import React from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {Dialogs} from "./Dialogs";
 
 type MSTPType = {
     dialogsPage: MessagesPageType
-    isAuth: boolean
 }
 
 type MDTPType = {
@@ -19,10 +17,11 @@ type MDTPType = {
 
 let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
     return {
-        dialogsPage: state.messagesPage,
-        isAuth: state.auth.isAuth
+        dialogsPage: state.messagesPage
     }
 }
+
+
 let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType => {
     return {
         updateNewMessageBody: (body: string) => {
@@ -33,5 +32,7 @@ let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType =>
         }
     }
 }
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
