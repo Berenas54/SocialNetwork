@@ -5,6 +5,7 @@ import {ReduxRootStateType} from "../../redux/redux-store";
 import React from "react";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {Dialogs} from "./Dialogs";
+import {compose} from "redux";
 
 type MSTPType = {
     dialogsPage: MessagesPageType
@@ -32,7 +33,8 @@ let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType =>
         }
     }
 }
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)

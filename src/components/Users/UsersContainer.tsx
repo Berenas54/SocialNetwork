@@ -1,13 +1,11 @@
 import {connect} from "react-redux";
 import {ReduxRootStateType} from "../../redux/redux-store";
-import {
-    setCurrentPage,
-    getUsers, follow, unfollow
-} from "../../redux/users-reducer";
+import {follow, getUsers, setCurrentPage, unfollow} from "../../redux/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../commons/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MSTPType = {
@@ -97,11 +95,12 @@ let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
     }
 }
 
-let withRedirect = withAuthRedirect(UsersContainer)
-export default connect<MSTPType, MDTPType, {}, ReduxRootStateType>(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    getUsers
-})(withRedirect)
-//export default connect(mapStateToProps, {follow, unfollow, setUsers})(Users)
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect<MSTPType, MDTPType, {}, ReduxRootStateType>(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        getUsers
+    })
+)(UsersContainer)
