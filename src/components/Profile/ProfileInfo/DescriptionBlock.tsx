@@ -2,6 +2,7 @@ import React from 'react';
 import style from './DescriptionBlock.module.css';
 import {Preloader} from "../../commons/Preloader/Preloader";
 import {UserProfileType} from "../../../redux/profilePage-reducer";
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type DescriptionBlockPropsType = {
     profile: UserProfileType
@@ -17,6 +18,7 @@ export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
                  src={props.profile.photos.large}/>
         </div>
         <h2>{props.profile.fullName}</h2>
+        <ProfileStatus status={"hey"}/>
         <div>
             <h4>Contacts:</h4>
             <p>facebook:{props.profile.contacts.facebook}</p>
