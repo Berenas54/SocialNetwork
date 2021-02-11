@@ -42,7 +42,19 @@ export const userAPI = {
         return instance.post<UsersResponseType>(`follow/${id}`)
     },
     getProfile(id: string) {
+        return profileAPI.getProfile(id)
+    }
+}
+
+export const profileAPI = {
+    getProfile(id: string) {
         return instance.get<any>(`profile/${id}`)
+    },
+    getStatus(id: string) {
+        return instance.get(`profile/status/${id}`)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
     }
 }
 export const authAPI = {

@@ -34,6 +34,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: UserProfileType | null
+    status: string
 }
 
 export type UserProfileType = {
@@ -91,6 +92,7 @@ export type ActionsTypes =
     | setIsFetchingAc
     | setUserProfile
     | ToggleIsFollowingProgress
+    | SetStatusType
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -98,6 +100,10 @@ export type AddPostActionType = {
 export type UpdateNewPostTextType = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
+}
+export type SetStatusType = {
+    type: "SET_STATUS"
+    status: string
 }
 export type UpdateNewMessageTextType = {
     type: "UPDATE-NEW-MESSAGE-TEXT"

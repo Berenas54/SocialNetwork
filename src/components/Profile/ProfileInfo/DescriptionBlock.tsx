@@ -5,7 +5,9 @@ import {UserProfileType} from "../../../redux/profilePage-reducer";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type DescriptionBlockPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType,
+    status: string,
+    updateStatus: (status: string) => {}
 }
 
 export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
@@ -18,7 +20,7 @@ export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
                  src={props.profile.photos.large}/>
         </div>
         <h2>{props.profile.fullName}</h2>
-        <ProfileStatus status={"hey"}/>
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         <div>
             <h4>Contacts:</h4>
             <p>facebook:{props.profile.contacts.facebook}</p>
