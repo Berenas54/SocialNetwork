@@ -1,5 +1,5 @@
 import {ActionsTypes, MessagesPageType} from "../../redux/store";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/messagesPage-reducer";
+import {addMessageActionCreator} from "../../redux/messagesPage-reducer";
 import {connect} from "react-redux";
 import {ReduxRootStateType} from "../../redux/redux-store";
 import React from "react";
@@ -12,8 +12,7 @@ type MSTPType = {
 }
 
 type MDTPType = {
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
+    sendMessage: (newMessageText: string) => void
 }
 
 let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
@@ -25,11 +24,8 @@ let mapStateToProps = (state: ReduxRootStateType): MSTPType => {
 
 let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void): MDTPType => {
     return {
-        updateNewMessageBody: (body: string) => {
-            dispatch(updateNewMessageTextActionCreator(body))
-        },
-        sendMessage: () => {
-            dispatch(addMessageActionCreator())
+        sendMessage: (newMessageText) => {
+            dispatch(addMessageActionCreator(newMessageText))
         }
     }
 }

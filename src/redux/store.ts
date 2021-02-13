@@ -81,8 +81,6 @@ export type RootStateType = {
 
 export type ActionsTypes =
     AddPostActionType
-    | UpdateNewPostTextType
-    | UpdateNewMessageTextType
     | AddMessageType
     | FollowSuccess
     | UnfollowSuccess
@@ -95,22 +93,16 @@ export type ActionsTypes =
     | SetStatusType
 
 export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
+    type: "ADD-POST",
+    newPostText: string
 }
 export type SetStatusType = {
     type: "SET_STATUS"
     status: string
 }
-export type UpdateNewMessageTextType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    newText: string
-}
 export type AddMessageType = {
-    type: "ADD-MESSAGE"
+    type: "ADD-MESSAGE",
+    newMessageText: string
 
 }
 export type FollowSuccess = {
