@@ -6,8 +6,8 @@ import UsersContainer from './components/Users/UsersContainer';
 import {ReduxRootStateType} from "./redux/redux-store";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Login from './components/Login/Login';
 
 
 type AppStatePropsType = {
