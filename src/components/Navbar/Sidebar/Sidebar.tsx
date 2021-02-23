@@ -4,7 +4,7 @@ import {SideFriend} from "./SideFriend/SideFriend";
 import {AsideStateType} from "../../../redux/store";
 
 type SidebarPropsType = {
-    asideState: AsideStateType
+    asideState:  AsideStateType
 }
 
 const Sidebar = (props: SidebarPropsType) => {

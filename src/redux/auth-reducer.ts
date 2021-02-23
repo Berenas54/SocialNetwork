@@ -60,6 +60,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
     })
 
 }
+
 export const logout = () => (dispatch: Dispatch) => {
     authAPI.logout().then(response => {
         if (response.data.resultCode === 0) {
