@@ -1,12 +1,11 @@
 import React from "react";
-import {Field, InjectedFormProps, reduxForm, stopSubmit} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../commons/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {ReduxRootStateType} from "../../redux/redux-store";
-import s from "../commons/FormsControls/FormsControls.module.css"
 
 type FormDataType = {
     email: string,
@@ -35,9 +34,9 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     return (<div>
             <h1>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
-        {/*{props.error && <div className={s.errorStyle}>*/}
-        {/*        {props.error}*/}
-        {/*    </div>}*/}
+            {/*{props.error && <div className={s.errorStyle}>*/}
+            {/*        {props.error}*/}
+            {/*    </div>}*/}
         </div>
     )
 }
@@ -67,7 +66,7 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: 'Login'
 })(LoginForm)
 
-const mapStateToProps = (state:ReduxRootStateType): MapStatePropsType => ({
+const mapStateToProps = (state: ReduxRootStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth
 })
 
