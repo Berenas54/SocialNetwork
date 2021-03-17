@@ -18,21 +18,24 @@ type NewPostFormType = {
 
 const maxLength10 = maxLengthCreator(10)
 
-export const MyPosts = (props: MyPostsPropsType) => {
-    const postsElement = props.profilePage.posts.map(post => <Post message={post.message}
-                                                                   likesCount={post.likesCount}/>)
+export class MyPosts extends React.PureComponent<MyPostsPropsType> {
 
-    const AddNewPost = (values: NewPostFormType) => {
-        props.addPost(values.newPostText)
-    }
+    render() {
+        const postsElement = this.props.profilePage.posts.map(post => <Post message={post.message}
+                                                                            likesCount={post.likesCount}/>)
 
-    return <div className={style.item}>
-        <h3>My posts</h3>
-        <div className={style.postAdding}>
-            <PostReduxForm onSubmit={AddNewPost}/>
+        const AddNewPost = (values: NewPostFormType) => {
+            this.props.addPost(values.newPostText)
+        }
+
+        return <div className={style.item}>
+            <h3>My posts</h3>
+            <div className={style.postAdding}>
+                <PostReduxForm onSubmit={AddNewPost}/>
+            </div>
+            {postsElement}
         </div>
-        {postsElement}
-    </div>
+    }
 }
 
 const PostForm: React.FC<InjectedFormProps<NewPostFormType>> = (props) => {
