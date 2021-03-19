@@ -1,4 +1,4 @@
-import {SET_USER_PROFILE} from "./profilePage-reducer";
+import {deletePostType, SET_USER_PROFILE} from "./profilePage-reducer";
 import {
     FOLLOW,
     UNFOLLOW,
@@ -91,6 +91,7 @@ export type ActionsTypes =
     | setUserProfile
     | ToggleIsFollowingProgress
     | SetStatusType
+    | deletePostType
 
 export type AddPostActionType = {
     type: "ADD-POST",
