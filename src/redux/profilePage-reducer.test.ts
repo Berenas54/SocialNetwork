@@ -11,7 +11,6 @@ let State = {
     status: ""
 }
 
-
 it('new post should be added ', () => {
 
     const action = addPostActionCreator("Test done")

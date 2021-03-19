@@ -99,26 +99,17 @@ export const setStatusActionCreator = (status: string) =>
         type: SET_STATUS,
         status: status
     })
-export const getUserProfile = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        userAPI.getProfile(userId).then(response => {
-            dispatch(setUserProfile(response.data))
-        })
-    }
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+    const response = await userAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data))
 }
-export const getStatus = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getStatus(userId).then(response => {
-            dispatch(setStatusActionCreator(response.data))
-        })
-    }
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.getStatus(userId)
+    dispatch(setStatusActionCreator(response.data))
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatusActionCreator(status))
-            }
-        })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusActionCreator(status))
     }
 }
