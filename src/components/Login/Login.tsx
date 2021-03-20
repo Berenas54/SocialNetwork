@@ -19,31 +19,24 @@ type MapDispatchPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
 
-//fix
+//fix login error
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
-    }//79 урок, ошибки при логине
-    // else {
-    //     // let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
-    //     // dispatch(stopSubmit("login",{_error:message}))
-    // }
+    }
     return (<div>
             <h1>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
-            {/*{props.error && <div className={s.errorStyle}>*/}
-            {/*        {props.error}*/}
-            {/*    </div>}*/}
         </div>
     )
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field component={Input} name={"email"} placeholder={"Email"} validate={[required]}/>
             </div>
