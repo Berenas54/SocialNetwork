@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./users.module.css";
-import {UsersType} from "./UsersContainer";
 
 
 export type PaginatorPropsType = {
