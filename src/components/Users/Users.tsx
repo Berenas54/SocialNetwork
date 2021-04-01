@@ -26,7 +26,7 @@ export let Users = ({currentPage,onPageChanged,totalUsersCount,pageSize,...props
         pages.push(i)
     }
     return <div>
-       <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}/>
+       <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}/>
         {props.users.map(u =>
                 <div key={u.id}>
         <span>

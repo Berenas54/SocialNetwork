@@ -9,7 +9,7 @@ type AppStatePropsType = {
 }
 
 export const Navbar = (props: AppStatePropsType) => {
-    debugger
+
     return <nav className={style.nav}>
         <div className={style.item}>
             <NavLink to='/profile' activeClassName={style.activeLink}>Profile</NavLink>
