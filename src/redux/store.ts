@@ -55,7 +55,7 @@ export type UserProfileType = {
     userId: string | number,
     photos: {
         small: string,
-        large: string
+        large: string,
     }
 }
 
@@ -92,6 +92,15 @@ export type ActionsTypes =
     | ToggleIsFollowingProgress
     | SetStatusType
     | deletePostType
+    | setPhotosSuccessAT
+
+export type setPhotosSuccessAT = {
+    type: "SET_PHOTOS_SUCCESS",
+    photos: {
+        small: string,
+        large: string
+    }
+}
 
 export type AddPostActionType = {
     type: "ADD-POST",

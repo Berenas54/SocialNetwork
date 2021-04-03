@@ -1,5 +1,5 @@
 import {ActionsTypes, ProfilePageType, RootStateType} from '../../../redux/store';
-import {addPostActionCreator} from "../../../redux/profilePage-reducer";
+import {addPostAC} from "../../../redux/profilePage-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 
@@ -19,7 +19,7 @@ let mapStateToProps = (state: RootStateType): MSTPType => {
 let mapDispatchToProps = (dispatch: (actions: ActionsTypes) => void): MDTPType => {
     return {
         addPost: (newPostText:string) => {
-            dispatch(addPostActionCreator(newPostText))
+            dispatch(addPostAC(newPostText))
         }
     }
 }

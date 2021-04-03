@@ -74,11 +74,16 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
+        case "SET_PHOTOS_SUCCESS": {
+            //FIX TYPE
+            // @ts-ignore
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state
     }
 }
-export const addPostActionCreator = (newPostText: string): AddPostActionType =>
+export const addPostAC = (newPostText: string): AddPostActionType =>
     ({
         type: 'ADD-POST',
         newPostText
@@ -88,28 +93,43 @@ export const deletePostAC = (postID: string): deletePostType =>
         type: 'DELETE-POST',
         postID
     })
-export const setUserProfile = (profile: UserProfileType): setUserProfileType =>
+export const setUserProfileAC = (profile: UserProfileType): setUserProfileType =>
     ({
         type: SET_USER_PROFILE,
         profile
     })
 
-export const setStatusActionCreator = (status: string) =>
+export const setStatusAC = (status: string) =>
     ({
         type: SET_STATUS,
-        status: status
+        status
     })
+export const setPhotosSuccessAC = (photos: {
+    small: string,
+    large: string
+}) =>
+    ({
+        type: "SET_PHOTOS_SUCCESS",
+        photos
+    })
+
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     const response = await userAPI.getProfile(userId)
-    dispatch(setUserProfile(response.data))
+    dispatch(setUserProfileAC(response.data))
 }
 export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getStatus(userId)
-    dispatch(setStatusActionCreator(response.data))
+    dispatch(setStatusAC(response.data))
 }
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
-        dispatch(setStatusActionCreator(status))
+        dispatch(setStatusAC(status))
+    }
+}
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(setPhotosSuccessAC(response.data.data.photos))
     }
 }

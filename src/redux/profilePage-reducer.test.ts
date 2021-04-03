@@ -1,4 +1,4 @@
-import {addPostActionCreator, deletePostAC, profilePageReducer} from "./profilePage-reducer";
+import {addPostAC, deletePostAC, profilePageReducer} from "./profilePage-reducer";
 
 let State = {
     posts: [
@@ -13,7 +13,7 @@ let State = {
 
 it('new post should be added ', () => {
 
-    const action = addPostActionCreator("Test done")
+    const action = addPostAC("Test done")
 
     const newState = profilePageReducer(State, action)
 
@@ -23,7 +23,7 @@ it('new post should be added ', () => {
 
 it('message should be corrected ', () => {
 
-    const action = addPostActionCreator("Test done")
+    const action = addPostAC("Test done")
 
     const newState = profilePageReducer(State, action)
 
