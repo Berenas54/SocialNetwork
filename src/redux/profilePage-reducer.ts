@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import {ActionsTypes, AddPostActionType, PostType, ProfilePageType,} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, userAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 
 export type UserProfileType = {
@@ -19,7 +20,7 @@ export type UserProfileType = {
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    userId: string,
+    userId: number,
     photos: {
         small: string,
         large: string
@@ -131,5 +132,17 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     const response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(setPhotosSuccessAC(response.data.data.photos))
+    }
+}
+
+// @ts-ignore
+export const saveProfile = (profile:UserProfileType) => async (dispatch, getState) => {
+    const userId = getState().auth.userId
+    const response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0])
     }
 }

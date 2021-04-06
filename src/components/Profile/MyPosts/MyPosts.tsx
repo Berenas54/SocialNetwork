@@ -21,7 +21,7 @@ const maxLength10 = maxLengthCreator(10)
 export class MyPosts extends React.PureComponent<MyPostsPropsType> {
 
     render() {
-        const postsElement = this.props.profilePage.posts.map(post => <Post message={post.message}
+        const postsElement = this.props.profilePage.posts.map(post => <Post key={post.id} message={post.message}
                                                                             likesCount={post.likesCount}/>)
 
         const AddNewPost = (values: NewPostFormType) => {
