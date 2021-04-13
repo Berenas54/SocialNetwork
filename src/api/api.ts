@@ -36,22 +36,22 @@ export const userAPI = {
             return response.data
         })
     },
-    unfollowUsers(id: string) {
+    unfollowUsers(id: number) {
         return instance.delete<UsersResponseType>(`follow/${id}`)
     },
-    followUsers(id: string) {
+    followUsers(id: number) {
         return instance.post<UsersResponseType>(`follow/${id}`)
     },
-    getProfile(id: string) {
+    getProfile(id: number) {
         return profileAPI.getProfile(id)
     }
 }
 
 export const profileAPI = {
-    getProfile(id: string) {
+    getProfile(id: number) {
         return instance.get<any>(`profile/${id}`)
     },
-    getStatus(id: string) {
+    getStatus(id: number) {
         return instance.get(`profile/status/${id}`)
     },
     updateStatus(status: string) {

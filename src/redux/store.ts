@@ -1,4 +1,4 @@
-import {deletePostType, SET_USER_PROFILE} from "./profilePage-reducer";
+import {deletePostType, SET_USER_PROFILE, UserProfileType} from "./profilePage-reducer";
 import {
     FOLLOW,
     UNFOLLOW,
@@ -36,28 +36,28 @@ export type ProfilePageType = {
     profile: UserProfileType | null
     status: string
 }
-
-export type UserProfileType = {
-    aboutMe: string,
-    contacts: {
-        facebook: string | null,
-        website: string | null,
-        vk: string | null,
-        twitter: string | null,
-        instagram: string | null,
-        youtube: string | null,
-        github: string | null,
-        mainLink: string | null
-    },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    userId: string | number,
-    photos: {
-        small: string,
-        large: string,
-    }
-}
+//
+// type UserProfileType = {
+//     aboutMe: string,
+//     contacts: {
+//         facebook: string | null,
+//         website: string | null,
+//         vk: string | null,
+//         twitter: string | null,
+//         instagram: string | null,
+//         youtube: string | null,
+//         github: string | null,
+//         mainLink: string | null
+//     },
+//     lookingForAJob: boolean,
+//     lookingForAJobDescription: string,
+//     fullName: string,
+//     userId: string | number,
+//     photos: {
+//         small: string,
+//         large: string,
+//     }
+// }
 
 export type MessagesPageType = {
     messages: Array<MessageType>

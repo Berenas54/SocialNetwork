@@ -1,9 +1,8 @@
 import React from "react";
-import {ProfileDataType} from "./DescriptionBlock";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../commons/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
-import {UserProfileType} from "../../../redux/store";
+import {UserProfileType} from "../../../redux/profilePage-reducer";
 
 type PropsType = {
     profile: UserProfileType,
@@ -11,7 +10,7 @@ type PropsType = {
 }
 
 
-const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataType, PropsType> & PropsType> = ({
+const ProfileDataForm: React.FC<InjectedFormProps<UserProfileType, PropsType> & PropsType> = ({
                                                                                                   handleSubmit,
                                                                                                   profile,
                                                                                                   error
@@ -37,6 +36,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataType, PropsType> & 
     </form>
 }
 
-const ProfileDataFormRedux = reduxForm<ProfileDataType, PropsType>({form: "edit-profile"})(ProfileDataForm)
+const ProfileDataFormRedux = reduxForm<UserProfileType, PropsType>({form: "edit-profile"})(ProfileDataForm)
 
 export default ProfileDataFormRedux

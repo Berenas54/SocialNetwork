@@ -114,11 +114,11 @@ export const setPhotosSuccessAC = (photos: {
         photos
     })
 
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     const response = await userAPI.getProfile(userId)
     dispatch(setUserProfileAC(response.data))
 }
-export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getStatus(userId)
     dispatch(setStatusAC(response.data))
 }

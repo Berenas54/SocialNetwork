@@ -11,9 +11,9 @@ type DescriptionBlockPropsType = {
     isOwner: boolean,
     profile: UserProfileType,
     status: string,
-    updateStatus: (status: string) => {},
-    savePhoto: (photo: File) => {},
-    saveProfile: (formData: ProfileDataType) => Promise<any>
+    updateStatus: (status: string) => void,
+    savePhoto: (photo: File) => void,
+    saveProfile: (formData: UserProfileType) => Promise<any>
 }
 
 export type ProfileDataType = {
@@ -39,13 +39,12 @@ export const DescriptionBlock = (props: DescriptionBlockPropsType) => {
         return <Preloader/>
     }
     //FIX ANY!!!
-    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement> | any) => {
-        if (e.target.files.length) {
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement> ) => {
+        if (e.target.files?.length) {
             props.savePhoto(e.target.files[0])
         }
     }
-    const onSubmit = (formData: ProfileDataType) => {
-        // @ts-ignore
+    const onSubmit = (formData: UserProfileType) => {
         props.saveProfile(formData).then(() => {
             setEditMode(false)
         })

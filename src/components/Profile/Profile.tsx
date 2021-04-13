@@ -1,5 +1,5 @@
 import React from 'react';
-import {DescriptionBlock, ProfileDataType} from "./ProfileInfo/DescriptionBlock";
+import {DescriptionBlock} from "./ProfileInfo/DescriptionBlock";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../redux/profilePage-reducer";
 
@@ -7,8 +7,8 @@ export type ProfilePropsType = {
     isOwner: boolean
     profile: UserProfileType
     status: string,
-    updateStatus: (status: string) => {},
-    savePhoto: (photo: File) => {},
+    updateStatus: (status: string) => void,
+    savePhoto: (photo: File) => void,
     saveProfile: (profile: UserProfileType) => Promise<any>
 
 

@@ -16,8 +16,8 @@ import {compose} from 'redux';
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
-    getUserProfile: (userId: string) => void
-    getStatus: (userId: string) => void
+    getUserProfile: (userId: number) => void
+    getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
     saveProfile: (profile: UserProfileType) => Promise<any>
@@ -32,12 +32,11 @@ type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathPara
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
-        let userId = this.props.match.params.userId
-        if (!userId) {
+        let userId = +this.props.match.params.userId
+        if (!userId && this.props.authorizedUserId) {
             userId = this.props.authorizedUserId
-            if (!userId) {
-                this.props.history.push("/login")
-            }
+        } else {
+            this.props.history.push("/login")
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -57,7 +56,7 @@ class ProfileContainer extends React.Component<PropsType> {
     render() {
 
         return (
-            <Profile {...this.props}
+            this.props.profile && <Profile {...this.props}
                      isOwner={!this.props.match.params.userId}
                      profile={this.props.profile}
                      status={this.props.status}
